@@ -1,5 +1,7 @@
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * Created by MES on 7/16/2015.
@@ -13,30 +15,32 @@ public class MissionariesAndCannibals {
         if (solution == null) {
             System.out.println("No solution found");
         } else {
-            System.out.println(solution);
+            solution.printPath();
         }
     }
 
     private static State searchForSolution() {
-        Queue<State> queue = new LinkedList<>();
         State initState = new State();
+        Queue<State> queue = new LinkedList<>();    // frontier
         queue.add(initState);
+        Set<State> explored = new HashSet<>();
 
-        while (true) {
-
-            if (queue.isEmpty()) {
-                return null;
-            }
+        while (!queue.isEmpty()) {
 
             State state = queue.poll();
-            System.out.println(state);
-            if (state.isGoal()) {
-                return state;
-            }
+            explored.add(state);
 
             for (State childState : state.generateChildStates()) {
-                queue.add(childState);
+                if (!queue.contains(childState) && !explored.contains(childState)) {
+                    if (childState.isGoal()) {
+                        return childState;
+                    } else {
+                        queue.add(childState);
+                    }
+                }
             }
         }
+
+        return null;
     }
 }
