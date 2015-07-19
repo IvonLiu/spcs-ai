@@ -19,33 +19,30 @@ public class AStar {
 	{
       	/* Declare and initialize Frontier and Explored data structures */ 
 		/* Put start node in Fringe list Frontier */
-		Queue<Board> frontier = new PriorityQueue<>(11, new Comparator<Board>() {
-			@Override
-			public int compare(Board a, Board b) {
-				int aScore = a.getDistance() + heuristic.getCost(a, goalState);
-				int bScore = b.getDistance() + heuristic.getCost(b, goalState);				
-				return aScore - bScore;
-			}
-		});
+		Queue<Board> frontier = new PriorityQueue<>(11, (a, b) -> {
+            int aScore = a.getDistance() + heuristic.getCost(a, goalState);
+            int bScore = b.getDistance() + heuristic.getCost(b, goalState);
+            return aScore - bScore;
+        });
 		frontier.add(initialState);
-		
-		Set<Board> explored = new HashSet<Board>();
-		
-int count=0;
-		while (!frontier.isEmpty() && count <5)
-		{
-count++;
 
+System.out.println("Initial state:");
+initialState.print();
+
+		Set<Board> explored = new HashSet<>();
+		
+		while (!frontier.isEmpty())
+		{
 			/* Remove from Frontier list the node n for which f(n) is minimum */
 			/* Add n to Explored list*/
 			Board n = frontier.poll();
 			explored.add(n);
-			System.out.print("\n");
-n.print();
+
 			if (n.equals(goalState))
 			{
 				/* Print the solution path and other required information */
 				/* Trace the solution path from goal state to initial state using getParent() function*/
+				System.out.println("Printing solution");
 				printSolution(n);
 				return;
 			}
@@ -54,6 +51,7 @@ n.print();
 			for (int i = 0 ;i<successors.size(); i++)
 			{
 				Board n1 = successors.get(i);
+
 				/* if n1 is not already in either Frontier or Explored
 				      Compute h(n1), g(n1) = g(n)+c(n, n1), f(n1)=g(n1)+h(n1), place n1 in Frontier
 				   if n1 is already in either Frontier or Explored
@@ -80,10 +78,14 @@ n.print();
 
 	private void printSolution(Board board) {
 		if (board.getParent() == null) {
+			System.out.println("");
 			board.print();
+			return;
 		}
 
 		printSolution(board.getParent());
+
+		System.out.println("");
 		board.print();
 	}
 

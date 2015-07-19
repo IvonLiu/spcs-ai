@@ -38,10 +38,11 @@ public class Board {
 		for (int i=LEFT; i<=DOWN; i++) {
 			board = swap(i);
 			if (board != null) {
+				board.setParent(this);
 				successors.add(board);
+			} else {
 			}
 		}
-
 		return successors;
 	}
 
@@ -64,7 +65,7 @@ public class Board {
 			}
 		}
 
-		int[][] newTiles = tiles.clone();
+		int[][] newTiles = clone2dArray(tiles);
 
 		switch (tile) {
 
@@ -80,7 +81,7 @@ public class Board {
 
 			case RIGHT:
 			{
-				if (col0 == newTiles[0].length-1) {
+				if (col0 == columns-1) {
 					return null;
 				}
 				newTiles[row0][col0] = newTiles[row0][col0+1];
@@ -100,7 +101,7 @@ public class Board {
 
 			case DOWN:
 			{
-				if (row0 == newTiles.length-1) {
+				if (row0 == rows-1) {
 					return null;
 				}
 				newTiles[row0][col0] = newTiles[row0+1][col0];
@@ -141,5 +142,13 @@ public class Board {
 	
 	public int getDistance() {
 		return distance;
+	}
+
+	private static int[][] clone2dArray(int[][] array) {
+		int [][] newArray = new int[array.length][];
+		for(int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].clone();
+		}
+		return newArray;
 	}
 }

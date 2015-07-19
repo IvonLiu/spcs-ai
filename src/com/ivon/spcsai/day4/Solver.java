@@ -61,7 +61,7 @@ public class Solver {
     public static void main(String[] args) {
 		args = new String[] {
 			"empty",
-			"/sdcard/AIDEprojects/spcs-artificial-intelligence/res/day4/boards.txt"
+			"res/day4/boards.txt"
 		};
         if (args.length < 2) {
             System.err.println("Usage : Token heuristic inputFile");
@@ -72,7 +72,7 @@ public class Solver {
         Initialize(inputfile);
 		if (heuristic.equals("empty"))
 		{
-        	AStar searcher = new AStar(initialBoard, goalBoard, new EmptyHeuristic());	//Choose heuristic function according to the input argument 0
+        	AStar searcher = new AStar(initialBoard, goalBoard, new HammingHeuristic());	//Choose heuristic function according to the input argument 0
         	searcher.search();
 		}
     }
