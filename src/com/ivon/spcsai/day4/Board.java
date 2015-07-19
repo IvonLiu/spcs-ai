@@ -7,11 +7,11 @@ public class Board {
 	public static int columns=3;
 	private Board parent = null; /* only initial board's parent is null */
 	public int[][] tiles;
-	private int generation;
+	private int distance;
 
-	public Board(int generation, int[][] cells)                 //Populate states
+	public Board(int distance, int[][] cells)                 //Populate states
 	{
-	  this.generation = generation;
+		this.distance = distance;
 
 	  tiles = new int[rows][columns];
 		for (int i = 0 ;i<rows; i++)
@@ -109,7 +109,7 @@ public class Board {
 			}
 		}
 
-		return new Board(generation+1, newTiles);
+		return new Board(distance+1, newTiles);
 	}
 
 	public void print()
@@ -135,7 +135,11 @@ public class Board {
 		return parent;
 	}
 
-	public int getGeneration() {
-		return generation;
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	
+	public int getDistance() {
+		return distance;
 	}
 }

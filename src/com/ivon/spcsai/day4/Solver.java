@@ -33,7 +33,7 @@ public class Solver {
                         }
                     }
                 }
-                initialBoard = new Board(maps);
+                initialBoard = new Board(0, maps);
                 inputReader.readLine();                                     //Reads empty line between Initial state and Goal State
                 //read goal state from file
                 for (int i = 0; i < n; i++) {
@@ -59,17 +59,21 @@ public class Solver {
     }
 
     public static void main(String[] args) {
+		args = new String[] {
+			"empty",
+			"/sdcard/AIDEprojects/spcs-artificial-intelligence/res/day4/boards.txt"
+		};
         if (args.length < 2) {
             System.err.println("Usage : Token heuristic inputFile");
             System.exit(-1);
         }
-	heuristic = args[0];		
-	inputfile = args[1];
+		heuristic = args[0];		
+		inputfile = args[1];
         Initialize(inputfile);
-	if (heuristic.equals("empty"))
-	{
-        	AStar searcher = new AStar(initialBoard, goalBoard, new ManhattanHeuristic());	//Choose heuristic function according to the input argument 0
+		if (heuristic.equals("empty"))
+		{
+        	AStar searcher = new AStar(initialBoard, goalBoard, new EmptyHeuristic());	//Choose heuristic function according to the input argument 0
         	searcher.search();
-	}
+		}
     }
 }
