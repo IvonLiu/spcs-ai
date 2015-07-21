@@ -58,8 +58,16 @@ end
 
 scores = sortrows(scores, 2);
 
-for i=1:length(scores)
-    fprintf('Score %4d: %f\n', scores(i,1), scores(i,2));
+fprintf('----- Lowest 50 scores -----\n');
+for i=1:50
+    gene_name = printCasename(casenames,scores(i,1));
+    fprintf('%-35s: %f\n', gene_name, scores(i,2));
 end
-fprintf('Done\n');
 
+fprintf('\n----- Top 50 scores -----\n');
+for i=(length(scores)-50):length(scores)
+    gene_name = printCasename(casenames,scores(i,1));
+    fprintf('%-35s: %f\n', gene_name, scores(i,2));
+end
+
+fprintf('Done\n');
