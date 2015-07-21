@@ -4,7 +4,7 @@ fprintf('Hello world!\n');
 % Read the file
 %[data,varnames,casenames] = tblread('training_set.tab', '\t');
 
-scores = zeros(1,length(casenames));
+scores(1:4400,1:2) = 0;
 
 for row=1:length(casenames)
     
@@ -50,15 +50,16 @@ for row=1:length(casenames)
     %fprintf('Positive variance average=%f, negative variance average=%f\n', positive_variance_avg, negative_variance_avg);
         
     score = (positive_avg - negative_avg) / (positive_variance_avg + negative_variance_avg);
-    scores(row) = score;
+    scores(row, 1) = row;
+    scores(row, 2) = score;
     %fprintf('Score: %f\n', score);
     
 end
 
-scores = sort(scores);
+scores = sortrows(scores, 2);
 
 for i=1:length(scores)
-    fprintf('Score %d: %f\n', i, scores(i));
+    fprintf('Score %4d: %f\n', scores(i,1), scores(i,2));
 end
 fprintf('Done\n');
 
