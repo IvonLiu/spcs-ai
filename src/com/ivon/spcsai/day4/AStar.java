@@ -42,6 +42,7 @@ initialState.print();
 			{
 				/* Print the solution path and other required information */
 				/* Trace the solution path from goal state to initial state using getParent() function*/
+				System.out.println("\nExplored " + explored.size() + " states\n");
 				System.out.println("Printing solution");
 				printSolution(n);
 				return;
@@ -59,7 +60,6 @@ initialState.print();
 				          Replace existing n1 with newly generated g(n1), h(n1), set parent of n1 to n
 				          if n1 is in Explored list
 				              Move n1 from Explored to Frontier list*/
-				// TODO: Andrei is upset with this, possibly broken
 				if (!frontier.contains(n1) && !explored.contains(n1)) {
 					frontier.add(n1);					
 				} else {

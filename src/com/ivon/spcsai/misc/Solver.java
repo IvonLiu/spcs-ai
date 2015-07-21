@@ -1,4 +1,4 @@
-package com.ivon.spcsai.day4;
+package com.ivon.spcsai.misc;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,7 +33,7 @@ public class Solver {
                         }
                     }
                 }
-                initialBoard = new Board(0, maps);
+                initialBoard = new Board(maps);
                 inputReader.readLine();                                     //Reads empty line between Initial state and Goal State
                 //read goal state from file
                 for (int i = 0; i < n; i++) {
@@ -47,7 +47,7 @@ public class Solver {
                         }
                     }
                 }
-                goalBoard = new Board(0, maps);
+                goalBoard = new Board(maps);
 
 
             } finally {
@@ -60,20 +60,32 @@ public class Solver {
 
     public static void main(String[] args) {
 		args = new String[] {
-			"empty",
+			"hamming",
 			"res/day4/boards.txt"
 		};
         if (args.length < 2) {
             System.err.println("Usage : Token heuristic inputFile");
             System.exit(-1);
         }
-		heuristic = args[0];		
-		inputfile = args[1];
+	heuristic = args[0];		
+	inputfile = args[1];
         Initialize(inputfile);
+           
 		if (heuristic.equals("empty"))
 		{
-        	AStar searcher = new AStar(initialBoard, goalBoard, new ManhattanHeuristic());	//Choose heuristic function according to the input argument 0
-        	searcher.search();
+			System.out.println("got to work");
+	        	AStar searcher = new AStar(initialBoard, goalBoard, new EmptyHeuristic());	//Choose heuristic function according to the input argument 0
+	        	searcher.search();
+		}
+		else if (heuristic.equals("hamming"))
+		{
+	        	AStar searcher = new AStar(initialBoard, goalBoard, new HammingHeuristic());	//Choose heuristic function according to the input argument 0
+	        	searcher.search();
+		}
+		else if (heuristic.equals("manhattan"))
+		{
+	        	AStar searcher = new AStar(initialBoard, goalBoard, new ManhattanHeuristic());	//Choose heuristic function according to the input argument 0
+	        	searcher.search();
 		}
     }
 }
