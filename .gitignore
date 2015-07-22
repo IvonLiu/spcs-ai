@@ -92,3 +92,5 @@ proguard/
 
 # Simulink Code Generation
 slprj/
+
+.last_tmp.py
