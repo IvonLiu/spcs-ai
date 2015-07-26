@@ -105,7 +105,7 @@ public class BuildAndTestDecisionTree
         while (!exampleSetQueue.isEmpty()) {
 
             // Calculate the best question to ask at each example set (i.e. "node")
-            BinaryFeature bestQuestion = new BinaryFeature("")
+            //BinaryFeature bestQuestion = new BinaryFeature("");
         }
 
 
