@@ -49,6 +49,7 @@ train <- cbind(train[,c(1,2)],model.matrix(~ -1 + .,train[,-c(1,2)]))
 
 #separate the test from train
 test <- train[train$USER_ID_hash=="dummyuser",]
+#delete column 2 (USER_ID_hash) because it is all dummyuser
 test <- test[,-2]
 train <- train[train$USER_ID_hash!="dummyuser",]
 
