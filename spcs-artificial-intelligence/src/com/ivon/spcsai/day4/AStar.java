@@ -44,6 +44,7 @@ initialState.print();
 				/* Trace the solution path from goal state to initial state using getParent() function*/
 				System.out.println("\nExplored " + explored.size() + " states\n");
 				System.out.println("Printing solution");
+				step = 0;
 				printSolution(n);
 				return;
 			}
@@ -75,14 +76,16 @@ initialState.print();
 		}
 		System.out.println("No Solution");
 	}
-
+	private int step = 0;
 	private void printSolution(Board board) {
 		if (board.getParent() == null) {
 			System.out.println("");
+			System.out.println("\nSolution in " + step + " steps");
 			board.print();
 			return;
 		}
 
+		step++;
 		printSolution(board.getParent());
 
 		System.out.println("");
