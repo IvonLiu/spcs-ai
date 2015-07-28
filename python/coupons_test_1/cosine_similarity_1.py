@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import patsy
+from scipy import spatial
 
 __author__ = 'MES'
 
@@ -48,13 +49,17 @@ train1 = train[['COUPON_ID_hash', 'USER_ID_hash']]
 train = pd.concat([train1, train2], axis=1)
 
 # Split it into test and train data frames
-test = train.loc[train['USER_ID_hash'] == 'dummyuser']
-test = test.drop(['USER_ID_hash'], axis=1)
+test_coupons = train.loc[train['USER_ID_hash'] == 'dummyuser']
+test_coupons = test_coupons.drop(['USER_ID_hash'], axis=1)
 train = train.loc[train['USER_ID_hash'] != 'dummyuser']
 
 # take mean of each column for each user
-grouped = train.groupby('USER_ID_hash')
-grouped = grouped.aggregate(np.mean)
+user_preferences = train.groupby('USER_ID_hash', as_index=False).aggregate(np.mean)
 
+# convert them into numpy arrays
+upmat = user_preferences.as_matrix(user_preferences.columns.difference(['USER_ID_hash']))
+tcmat = test_coupons.as_matrix(test_coupons.columns.difference(['COUPON_ID_hash']))
+
+similarity = np.dot(upmat, tcmat.T)
 
 print("done")

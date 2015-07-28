@@ -57,6 +57,10 @@ train <- train[train$USER_ID_hash!="dummyuser",]
 # take mean of each column for each user
 uchar <- aggregate(.~USER_ID_hash, data=train[,-1],FUN=mean)
 
+user_matrix <- as.matrix(uchar[,2:ncol(uchar)])
+cp_matrix <- as.matrix(test[,2:ncol(test)])
+tcp_matrix <- t(cp_matrix)
+
 #calculation of cosine similairties of users and coupons
 score = as.matrix(uchar[,2:ncol(uchar)]) %*% t(as.matrix(test[,2:ncol(test)]))
 #order the list of coupons according to similairties and take only first 10 coupons
@@ -68,4 +72,4 @@ uchar$PURCHASED_COUPONS <- do.call(rbind, lapply(1:nrow(uchar),FUN=function(i){
 #make submission
 uchar <- merge(ulist, uchar, all.x=TRUE)
 submission <- uchar[,c("USER_ID_hash","PURCHASED_COUPONS")]
-write.csv(submission, file="cosine_sim.csv", row.names=FALSE)
+write.csv(submission, file="data/output/cosine_sim.csv", row.names=FALSE)
