@@ -1,5 +1,3 @@
-package com.ivon.spcsai.day4;
-
 public class HammingHeuristic implements AStarHeuristic{
 	public int getCost(Board state, Board goalState)
 	{

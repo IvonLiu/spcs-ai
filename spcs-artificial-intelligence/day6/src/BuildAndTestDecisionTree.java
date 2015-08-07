@@ -1,7 +1,9 @@
-package com.ivon.spcsai.day6;
-
-import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
 ////////////////////////////////////////////////////////////////////////////
 //                                                                       

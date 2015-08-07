@@ -1,5 +1,3 @@
-package com.ivon.spcsai.day6;
-
 /**
  * Created by MES on 7/22/2015.
  */

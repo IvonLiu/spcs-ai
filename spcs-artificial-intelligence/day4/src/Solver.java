@@ -1,10 +1,8 @@
-package com.ivon.spcsai.day4;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class Solver {
 
@@ -61,7 +59,7 @@ public class Solver {
     public static void main(String[] args) {
 		args = new String[] {
 			"manhattan",
-			"res/day4/boards.txt"
+			"day4/res/boards.txt"
 		};
         if (args.length < 2) {
             System.err.println("Usage : Token heuristic inputFile");

@@ -1,5 +1,3 @@
-package com.ivon.spcsai.day4;
-
 import java.util.ArrayList;
 
 public class Board {
