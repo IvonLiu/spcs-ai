@@ -60,7 +60,7 @@ public class Solver {
 
     public static void main(String[] args) {
 		args = new String[] {
-			"empty",
+			"manhattan",
 			"res/day4/boards.txt"
 		};
         if (args.length < 2) {
@@ -70,11 +70,19 @@ public class Solver {
 		heuristic = args[0];		
 		inputfile = args[1];
         Initialize(inputfile);
-		if (heuristic.equals("empty"))
-		{
-        	AStar searcher = new AStar(initialBoard, goalBoard, new ManhattanHeuristic());	//Choose heuristic function according to the input argument 0
-        	searcher.search();
-		}
+        AStar searcher;
+        switch (heuristic) {
+            case "hamming":
+                searcher = new AStar(initialBoard, goalBoard, new HammingHeuristic());
+                break;
+            case "manhattan":
+                searcher = new AStar(initialBoard, goalBoard, new ManhattanHeuristic());
+                break;
+            default:
+                searcher = new AStar(initialBoard, goalBoard, new EmptyHeuristic());
+                break;
+        }
+        searcher.search();
     }
 }
 
